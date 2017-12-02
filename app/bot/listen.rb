@@ -85,7 +85,7 @@ end
 def get_income(idx, rep)
   Bot.deliver({
     recipient: {
-      id: idx
+      id: rep
     },
     message: {
       text: "Enter your current income"
