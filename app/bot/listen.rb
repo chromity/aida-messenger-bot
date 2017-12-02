@@ -44,21 +44,22 @@ def get_education
         }
       }
     )
-
-    Bot.on :postback do |postback|
-      message.reply(text: "HEH")
-      get_health_condition()
+    Bot.on postback do |postback|
+      message.reply(text: "kek")
     end
+
+    get_health_condition
   end
 end
 
 def get_health_condition
+  Bot.on :message do |message|
     message.reply(
       attachment: {
         type: 'template',
         payload: {
           template_type: 'button', # change this
-          text: "Enter your health condition",
+          text: "Enter health condition",
           buttons: [
             { type: 'postback', title: "Poor", payload: "Poor" },
             { type: 'postback', title: "Fair", payload: "Fair"},
@@ -67,6 +68,7 @@ def get_health_condition
         }
       }
     )
+  end
 
   get_health_postback()
 end
