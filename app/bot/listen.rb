@@ -23,52 +23,143 @@ end
 def get_full_name
   Bot.on :message do |message|
     name = message.text
-    message.reply(text: "Thank you #{name}. Now, please answer some questions to get started. Type Y to start.")
-    get_education()
-  end
-end
+    message.reply(text: "Thank you #{name}.")
+    message.reply(text: "Please answer a few questions to continue.")
 
-def get_education
-  Bot.on :message do |message|
+    message.typing_on
+
     message.reply(
-      attachment: {
-        type: 'template',
-        payload: {
-          template_type: 'button', # change this
-          text: "Enter your highest education attainment",
-          buttons: [
-            { type: 'postback', title: "Elementary", payload: "Elementary" },
-            { type: 'postback', title: "Senior High School", payload: "Senior High School"},
-            { type: 'postback', title: "College", payload: "College"}
-          ]
+      text: "Enter your highest educational background",
+      quick_replies: [
+        {
+          content_type: 'text',
+          title: 'Elementary',
+          payload: 'Elementary'
         }
-      }
+      ]
     )
 
-    Bot.on :postback do |postback|
-    end
+    Bot.on :message do |message|
+      educational_background = message.text
 
-    get_health_condition
+      message.reply(text: "Enter your current income")
+
+      Bot.on :message do |message|
+        income = message.text
+
+        message.reply(
+          text: "Select your health condition",
+          quick_replies: [
+            {
+              content_type: 'text',
+              title: 'Poor',
+              payload: 'Poor'
+            }
+          ]
+        )
+
+        Bot.on :message do |message|
+          health = message.text
+          message.reply(text: "Please enter your monthly expense:")
+
+          Bot.on :message do |message|
+            expense = message.text
+
+            message.reply(
+              text: "Are you familiar with stocks?",
+              quick_replies: [
+                {
+                  content_type: 'text',
+                  title: 'Yes',
+                  payload: 'Yes'
+                },
+
+                {
+                  content_type: 'text',
+                  title: 'No',
+                  payload: 'No'
+                }
+              ]
+            )
+
+            Bot.on :message do |message|
+              stocks = message.text
+
+              message.reply(
+                text: "How about Cryptocurrency?",
+                quick_replies: [
+                  {
+                    content_type: 'text',
+                    title: 'Yes',
+                    payload: 'Yes'
+                  },
+
+                  {
+                    content_type: 'text',
+                    title: 'No',
+                    payload: 'No'
+                  }
+                ]
+              )
+
+              Bot.on :message do |message|
+                crypto = message.text
+
+                message.reply(
+                  text: "Do you have a Unionbank Account?",
+                  quick_replies: [
+                    {
+                      content_type: 'text',
+                      title: 'Yes',
+                      payload: 'Yes'
+                    },
+
+                    {
+                      content_type: 'text',
+                      title: 'No',
+                      payload: 'No'
+                    }
+                  ]
+                )
+
+              setup_account
+              end
+            end
+          end
+        end
+      end
+    end
   end
 end
 
-def get_health_condition
-  message.reply(
-    text: "Enter your health condition",
-    quick_replies: [
-      {
-        content_type: 'text',
-        title: 'Poor',
-        payload: 'Poor'
-      }
-    ]
+def setup_account
+  Bot.on :message do |message|
+    have_union = message.text
 
-    Bot.on :message do |message|
-      payload = message.text
-      message.reply(text: "#{payload}")
-    end
-  )
+    message.reply(
+      text: "Continue to predictions?",
+      quick_replies: [
+        {
+          content_type: 'text',
+          title: 'Yes',
+          payload: 'Yes'
+        },
+
+        {
+          content_type: 'text',
+          title: 'No',
+          payload: 'No'
+        }
+      ]
+    )
+
+    menu
+  end
 end
 
+def menu
+  Bot.on :message do |message|
+  end
+end
 
 welcome
