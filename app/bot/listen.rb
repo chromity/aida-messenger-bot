@@ -77,7 +77,7 @@ def get_health_postback
   Bot.on :postback do |postback|
     id = postback.sender
     rep = postback.recipient
-    def get_income(id, rep)
+    get_income(id, rep)
   end
 end
 
@@ -85,7 +85,7 @@ end
 def get_income(idx, rep)
   Bot.deliver({
     recipient: {
-      id: rep
+      id: idx
     },
     message: {
       text: "Enter your current income"
