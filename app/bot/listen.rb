@@ -53,16 +53,18 @@ def get_education
 end
 
 def get_health_condition
-  message.reply(
-    text: "Enter your health condition",
-    quick_replies: [
-      {
-        content_type: 'text',
-        title: 'Poor',
-        payload: 'Poor'
-      }
-    ]
-  )
+  Bot.on :message do |message|
+    message.reply(
+      text: "Enter your health condition",
+      quick_replies: [
+        {
+          content_type: 'text',
+          title: 'Poor',
+          payload: 'Poor'
+        }
+      ]
+    )
+  end
 
   Bot.on :message do |message|
       payload = message.text
