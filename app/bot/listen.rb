@@ -38,40 +38,30 @@ def get_full_name
     )
 
     Bot.on :message do |message|
-        educational_background = message.text
+      educational_background = message.text
 
-        message.reply(text: "Enter your current income:")
+      message.reply(text: "Enter your current income:")
+
+      Bot.on :message do |message|
+        income = message.text
+
+        message.reply(
+          text: "Enter your health condition",
+          quick_replies: [
+            {
+              content_type: 'text',
+              title: 'Poor',
+              payload: 'Poor'
+            }
+          ]
+        )
+
 
         Bot.on :message do |message|
-          income = message.text
-
-          message.reply(
-            text: "Enter your health condition",
-            quick_replies: [
-              {
-                content_type: 'text',
-                title: 'Poor',
-                payload: 'Poor'
-              }
-            ]
-          )
-
-
-          Bot.on :message do |message|
-              health = message.text
-              message.reply(text: "Enter your current income:")
-              get_income
-          end
+            health = message.text
         end
       end
-  end
-end
-
-
-def get_income
-  Bot.on :message do |message|
-    income = message.text
-    message.reply(text: "#{income}")
+    end
   end
 end
 
