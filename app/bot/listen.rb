@@ -24,8 +24,9 @@ def get_full_name
   Bot.on :message do |message|
     name = message.text
     message.reply(text: "Thank you #{name}. Now, please answer some questions to get started. Type y to start.")
-    get_education()
   end
+
+  get_education()
 end
 
 def get_education
