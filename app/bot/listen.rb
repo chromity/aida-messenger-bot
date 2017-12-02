@@ -232,7 +232,7 @@ def menu
           content_type: 'text',
           title: 'Travel',
           payload: 'Travel'
-        },
+        }
       ]
     )
 
