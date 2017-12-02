@@ -46,7 +46,6 @@ def get_education
     )
 
     Bot.on :postback do |postback|
-      message.reply(text: "kek")
     end
 
     get_health_condition
