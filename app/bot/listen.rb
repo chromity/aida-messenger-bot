@@ -27,7 +27,7 @@ def get_full_name
     message.typing_on
     message.reply(text: "Please answer a few questions to continue.")
 
-    message.typing_on
+    sleep 1
 
     message.reply(
       text: "Enter your highest educational background",
@@ -56,6 +56,8 @@ def get_full_name
       Bot.on :message do |message|
         income = message.text
 
+        sleep 1
+
         message.reply(
           text: "Select your health condition",
           quick_replies: [
@@ -83,6 +85,8 @@ def get_full_name
 
           Bot.on :message do |message|
             expense = message.text
+
+            sleep 1
 
             message.reply(
               text: "Are you familiar with stocks?",
@@ -187,7 +191,54 @@ end
 
 def menu
   Bot.on :message do |message|
-    
+    message.reply(
+      quick_replies: [
+        {
+          content_type: 'text',
+          title: 'Housing',
+          payload: 'Housing'
+        },
+        {
+          content_type: 'text',
+          title: 'Sickness',
+          payload: 'Sickness'
+        },
+        {
+          content_type: 'text',
+          title: 'Disability',
+          payload: 'Disability'
+        },
+        {
+          content_type: 'text',
+          title: 'Maternity',
+          payload: 'Maternity'
+        },
+        {
+          content_type: 'text',
+          title: 'Retirement',
+          payload: 'Retirement'
+        },
+        {
+          content_type: 'text',
+          title: 'Funeral',
+          payload: 'Funeral'
+        },
+        {
+          content_type: 'text',
+          title: 'Education',
+          payload: 'Education'
+        },
+        {
+          content_type: 'text',
+          title: 'Travel',
+          payload: 'Travel'
+        },
+      ]
+    )
+
+    Bot.on :message do |message|
+      goal = message.text
+    end
   end
 end
 
