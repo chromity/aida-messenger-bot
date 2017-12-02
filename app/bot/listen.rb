@@ -41,6 +41,7 @@ def get_education
           ]
         }
       }
+    )
   end
 end
 
