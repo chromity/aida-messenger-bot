@@ -18,7 +18,7 @@ def welcome
     @user = User.find_by(messenger_id: message.sender[:id])
     if @user.present?
       if @user.name.present?
-        message.reply(text: "Welcome back, #{@user.name}!"
+        message.reply(text: "Welcome back, #{@user.name}!",
         quick_replies: [
           {content_type: 'text',
            title: "Sure, let's start!",
