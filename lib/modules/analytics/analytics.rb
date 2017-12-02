@@ -20,6 +20,26 @@ module Analytics
         R.pull("outliers(data)") rescue nil
       end
       
+      def bitcoin(days)
+        R.days = days
+        R.pull("bitcoin(days)") rescue nil
+      end
+
+      def etherium(days)
+        R.days = days
+        R.pull("etherium(days)") rescue nil
+      end
+
+      def bitcash(days)
+        R.days = days
+        R.pull("bitcash(days)") rescue nil
+      end
+
+      def stocks(days)
+        R.days = days
+        R.pull("stocks(days)") rescue nil        
+      end
+
       def housing(initial,percentage, investment, days)
         R.initial = initial
         R.percentage = percentage
