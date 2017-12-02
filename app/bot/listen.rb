@@ -39,10 +39,10 @@ def get_education
            payload: k
         }
       })
-  end
 
-  Bot.on :postback do |postback|
-    message.reply(text: "HEH")
+    Bot.on :postback do |postback|
+      message.reply(text: "HEH")
+    end
   end
 end
 
