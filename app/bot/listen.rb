@@ -46,9 +46,8 @@ def get_education
     )
 
     Bot.on :postback do |postback|
+      get_health_condition
     end
-
-    get_health_condition
   end
 end
 
