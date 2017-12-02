@@ -79,11 +79,19 @@ def get_education
            payload: "Doctorate"
         }
       ])
-
-    Bot.on :postback do |postback|
-      message.reply(text: "HEH")
-    end
+      get_education_postback()
   end
+end
+
+def get_education_postback
+  Bot.on :postback do |postback|
+    message.reply(text: "HEH")
+  end
+
+  get_health_condition()
+end
+
+def get_health_condition
 end
 
 
