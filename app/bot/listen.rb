@@ -123,7 +123,6 @@ def get_full_name
 
               setup_account
             end
-          end
         end
       end
     end
@@ -156,8 +155,6 @@ def setup_account
 end
 
 def menu
-  Bot.on :message do |message|
-  end
 end
 
 welcome
