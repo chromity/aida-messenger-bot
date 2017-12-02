@@ -156,6 +156,8 @@ def setup_account
 end
 
 def menu
+  Bot.on :message do |message|
+  end
 end
 
 welcome
