@@ -78,7 +78,7 @@ def get_education
            title: "Doctorate",
            payload: "Doctorate"
         }
-      }])
+      ])
 
     Bot.on :postback do |postback|
       message.reply(text: "HEH")
