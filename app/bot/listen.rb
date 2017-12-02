@@ -53,13 +53,12 @@ def get_education
 end
 
 def get_health_condition
-  Bot.on :message do |message|
     message.reply(
       attachment: {
         type: 'template',
         payload: {
           template_type: 'button', # change this
-          text: "Enter your highest health attainment",
+          text: "Enter your health condition",
           buttons: [
             { type: 'postback', title: "Poor", payload: "Poor" },
             { type: 'postback', title: "Fair", payload: "Fair"},
@@ -68,7 +67,6 @@ def get_health_condition
         }
       }
     )
-  end
 
   get_health_postback()
 end
