@@ -1,0 +1,2 @@
+class CryptoInsurance < Insurance
+end

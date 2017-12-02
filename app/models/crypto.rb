@@ -1,0 +1,2 @@
+class Crypto < Trade
+end

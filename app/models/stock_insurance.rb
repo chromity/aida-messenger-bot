@@ -1,0 +1,2 @@
+class StockInsurance < Insurance
+end
