@@ -18,7 +18,14 @@ def welcome
     @user = User.find_by(messenger_id: message.sender[:id])
     if @user.present?
       if @user.name.present?
-        message.reply(text: "Welcome back, #{@user.name}!")
+        message.reply(text: "Welcome back, #{@user.name}!",
+        quick_replies: [
+          {content_type: 'text',
+           title: "Sure, let's start!",
+           payload: "Sure, let's start!"
+          }
+        ])
+        main_process
       else
         message.reply(text: 'Welcome back, to get started please enter your full name.')
         get_full_name()
@@ -36,12 +43,24 @@ def get_full_name
     name = message.text
     @user = User.find_by(messenger_id: message.sender[:id])
     @user.update(name: name)
-    message.reply(text: "Thank you #{name}!")
-
-    message.typing_on
-    message.reply(text: "Please answer few questions to continue.")
+    message.reply(
+      text: "Thank you #{name}! Let's start?",
+      quick_replies: [
+      {content_type: 'text',
+       title: "Sure, let's start!",
+       payload: "Sure, let's start!"
+      }
+    ])
 
     sleep 1
+    main_process
+  end
+end
+
+def main_process
+  Bot.on :message do |message|
+    message.typing_on
+    message.reply(text: "Please answer few questions to continue.")
 
     message.reply(
       text: "Enter your highest educational background",
@@ -106,10 +125,10 @@ def get_full_name
 
         Bot.on :message do |message|
           health =  case message.text
-                    when "Poor" then "Grade School"
+                    when "Poor" then "Poor Health Condition"
                     when "Fair" then "Fair Health Condition"
                     when "Good" then "Good Health Condition"
-                    end          
+                    end
           @user = User.find_by(messenger_id: message.sender[:id])
           @user.update(health_condition: health)
 
@@ -209,20 +228,14 @@ def setup_account
       ]
     )
 
-    Bot.on :message do |message|
-      message.reply(
-        text: "Hi, based on your answers, it's better to be sure for your future. Here are
-      my suggestions on which things you should invest as early as now!")
-      message.typing_on
-      menu
-    end
+    menu
   end
 end
 
 def menu
   Bot.on :message do |message|
     message.reply(
-      text: " ",
+    text: "Hi, based on your answers, it's better to be sure for your future. Here are my suggestions on which things you should invest as early as now!",
       quick_replies: [
         {
           content_type: 'text',
@@ -290,60 +303,85 @@ def menu
         Bot.on :message do |message|
           get_insurance = message.text
 
-          message.reply(text: "How much percentage of your current allowance/income do you want to allocate in this kind of plan?")
+          message.reply(
+            text: "What is your investment plan?",
+            quick_replies: [
+              {
+                content_type: 'text',
+                title: "Long Term",
+                payload: "Long Term"
+              },
+              {
+                content_type: 'text',
+                title: "Short Term",
+                payload: "Short Term"
+              },
+              {
+                content_type: 'text',
+                title: "Undecided",
+                payload: "Undecided"
+              }
+            ]
+          )
+
           Bot.on :message do |message|
-            income_percentage = message.text
-            @user = User.find_by(messenger_id: message.sender[:id])
-            if @user.insurances.present?
-              @user.insurances.first.update(
-                sickness: (income_percentage/100),
-                disability: (income_percentage/100),
-                maternity: (income_percentage/100),
-                retirement: (income_percentage/100),
-                funeral: (income_percentage/100),
-                death: (income_percentage/100),
-                education: (income_percentage/100)
+            plan = message.text
+
+            message.reply(text: "How much percentage of your current allowance/income do you want to allocate in this kind of plan?")
+            Bot.on :message do |message|
+              income_percentage = message.text
+              @user = User.find_by(messenger_id: message.sender[:id])
+              if @user.insurances.present?
+                @user.insurances.first.update(
+                  sickness: (income_percentage/100),
+                  disability: (income_percentage/100),
+                  maternity: (income_percentage/100),
+                  retirement: (income_percentage/100),
+                  funeral: (income_percentage/100),
+                  death: (income_percentage/100),
+                  education: (income_percentage/100)
+                )
+              else
+                @user.insurances.create(
+                  sickness: (income_percentage/100),
+                  disability: (income_percentage/100),
+                  maternity: (income_percentage/100),
+                  retirement: (income_percentage/100),
+                  funeral: (income_percentage/100),
+                  death: (income_percentage/100),
+                  education: (income_percentage/100)
+                )
+              end
+
+              message.reply(
+                text: " ",
+                quick_replies: [
+                  {
+                    content_type: 'text',
+                    title: 'Stock',
+                    payload: 'Stock'
+                  },
+                  {
+                    content_type: 'text',
+                    title: 'Cryptocurrency',
+                    payload: 'Cryptocurrency'
+                  },
+                  {
+                    content_type: 'text',
+                    title: 'Loan',
+                    payload: 'Loan'
+
+                  },
+                  {
+                    content_type: 'text',
+                    title: 'Banking',
+                    payload: 'Banking'
+                  }
+                ]
               )
-            else
-              @user.insurances.create(
-                sickness: (income_percentage/100),
-                disability: (income_percentage/100),
-                maternity: (income_percentage/100),
-                retirement: (income_percentage/100),
-                funeral: (income_percentage/100),
-                death: (income_percentage/100),
-                education: (income_percentage/100)
-              )              
+
+              final_invest_process
             end
-
-            message.reply(
-              text: " ",
-              quick_replies: [
-                {
-                  content_type: 'text',
-                  title: 'Stock',
-                  payload: 'Stock'
-                },
-                {
-                  content_type: 'text',
-                  title: 'Cryptocurrency',
-                  payload: 'Cryptocurrency'
-                },
-                {
-                  content_type: 'text',
-                  title: 'Loan',
-                  payload: 'Loan'
-
-                },
-                {
-                  content_type: 'text',
-                  title: 'Banking',
-                  payload: 'Banking'
-                }
-              ]
-            )
-
-            final_invest_process
           end
         end
       end
@@ -359,9 +397,9 @@ def final_invest_process
     case message.text
     when "Stock" then @user.insurances.first.update(type: "Stock")
     when "Cryptocurrency" then @user.insurances.first.update(type: "Crypto")
-    end          
+    end
 
-    
+
     #process
     #insert coins etc
   end
