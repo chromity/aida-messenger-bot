@@ -85,7 +85,7 @@ def get_full_name
               stocks = message.text
 
               message.reply(
-                text: "Familiar with Crypto?"
+                text: "Familiar with Crypto?",
                 quick_replies: [
                   {
                     content_type: 'text',
@@ -105,7 +105,7 @@ def get_full_name
                 crypto = message.text
 
                 message.reply(
-                  text: "Do you have a Unionbank Account?"
+                  text: "Do you have a Unionbank Account?",
                   quick_replies: [
                     {
                       content_type: 'text',
@@ -135,7 +135,7 @@ def setup_account
     have_union = message.text
 
     message.reply(
-      text: "Continue to predictions?"
+      text: "Continue to predictions?",
       quick_replies: [
         {
           content_type: 'text',
