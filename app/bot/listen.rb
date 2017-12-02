@@ -23,7 +23,7 @@ end
 def get_full_name
   Bot.on :message do |message|
     name = message.text
-    message.reply(text: "Thank you #{name}. Now, please answer some questions to get started. Type y to start.")
+    message.reply(text: "Thank you #{name}. Now, please answer some questions to get started. Type Y to start.")
     get_education()
   end
 end
@@ -44,7 +44,8 @@ def get_education
         }
       }
     )
-    Bot.on postback do |postback|
+
+    Bot.on :postback do |postback|
       message.reply(text: "kek")
     end
 
