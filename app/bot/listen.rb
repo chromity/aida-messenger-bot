@@ -210,12 +210,11 @@ def setup_account
     )
 
     Bot.on :message do |message|
-    message.reply(
-      text: "Hi, based on your answers, it's better to be sure for your future. Here are
+      message.reply(
+        text: "Hi, based on your answers, it's better to be sure for your future. Here are
       my suggestions on which things you should invest as early as now!")
-
-    message.typing_on
-    menu
+      message.typing_on
+      menu
     end
   end
 end
@@ -287,41 +286,65 @@ def menu
         ]
       )
 
-      Bot.on :message do |message|
-        get_insurance = message.text
-
-        message.reply(text: "How much percentage of your current allowance/income do you want to allocate in this kind of plan?")
+      if message.text == "Yes"
         Bot.on :message do |message|
-          income_percentage = message.text
+          get_insurance = message.text
 
-          message.reply(
-            text: " ",
-            quick_replies: [
-              {
-                content_type: 'text',
-                title: 'Stock',
-                payload: 'Stock'
-              },
-              {
-                content_type: 'text',
-                title: 'Cryptocurrency',
-                payload: 'Cryptocurrency'
-              },
-              {
-                content_type: 'text',
-                title: 'Loan',
-                payload: 'Loan'
+          message.reply(text: "How much percentage of your current allowance/income do you want to allocate in this kind of plan?")
+          Bot.on :message do |message|
+            income_percentage = message.text
+            @user = User.find_by(messenger_id: message.sender[:id])
+            if @user.insurances.present?
+              @user.insurances.first.update(
+                sickness: (income_percentage/100),
+                disability: (income_percentage/100),
+                maternity: (income_percentage/100),
+                retirement: (income_percentage/100),
+                funeral: (income_percentage/100),
+                death: (income_percentage/100),
+                education: (income_percentage/100)
+              )
+            else
+              @user.insurances.create(
+                sickness: (income_percentage/100),
+                disability: (income_percentage/100),
+                maternity: (income_percentage/100),
+                retirement: (income_percentage/100),
+                funeral: (income_percentage/100),
+                death: (income_percentage/100),
+                education: (income_percentage/100)
+              )              
+            end
 
-              },
-              {
-                content_type: 'text',
-                title: 'Banking',
-                payload: 'Banking'
-              }
-            ]
-          )
+            message.reply(
+              text: " ",
+              quick_replies: [
+                {
+                  content_type: 'text',
+                  title: 'Stock',
+                  payload: 'Stock'
+                },
+                {
+                  content_type: 'text',
+                  title: 'Cryptocurrency',
+                  payload: 'Cryptocurrency'
+                },
+                {
+                  content_type: 'text',
+                  title: 'Loan',
+                  payload: 'Loan'
 
-          final_invest_process
+                },
+                {
+                  content_type: 'text',
+                  title: 'Banking',
+                  payload: 'Banking'
+                }
+              ]
+            )
+
+            final_invest_process
+          end
         end
       end
     end
@@ -331,7 +354,14 @@ end
 def final_invest_process
   Bot.on :messages do |message|
     invest_through = message.text
+    @user = User.find_by(messenger_id: message.sender[:id])
 
+    case message.text
+    when "Stock" then @user.insurances.first.update(type: "Stock")
+    when "Cryptocurrency" then @user.insurances.first.update(type: "Crypto")
+    end          
+
+    
     #process
     #insert coins etc
   end
