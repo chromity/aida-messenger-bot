@@ -23,7 +23,8 @@ end
 def get_full_name
   Bot.on :message do |message|
     name = message.text
-    message.reply(text: "Thank you #{name}. Now, please answer some questions to get started.")
+    message.reply(text: "Thank you #{name}.")
+    message.reply(text: "Please answer a few questions to continue.")
 
     message.typing_on
 
@@ -41,13 +42,13 @@ def get_full_name
     Bot.on :message do |message|
       educational_background = message.text
 
-      message.reply(text: "Enter your current income:")
+      message.reply(text: "Enter your current income")
 
       Bot.on :message do |message|
         income = message.text
 
         message.reply(
-          text: "Enter your health condition",
+          text: "Select your health condition",
           quick_replies: [
             {
               content_type: 'text',
@@ -59,13 +60,13 @@ def get_full_name
 
         Bot.on :message do |message|
           health = message.text
-          message.reply(text: "Please enter your expense:")
+          message.reply(text: "Please enter your monthly expense:")
 
           Bot.on :message do |message|
             expense = message.text
 
             message.reply(
-              text: "Familiar with Stocks?",
+              text: "Are you familiar with stocks?",
               quick_replies: [
                 {
                   content_type: 'text',
@@ -85,7 +86,7 @@ def get_full_name
               stocks = message.text
 
               message.reply(
-                text: "Familiar with Crypto?",
+                text: "How about Cryptocurrency?",
                 quick_replies: [
                   {
                     content_type: 'text',
@@ -157,6 +158,8 @@ def setup_account
 end
 
 def menu
+  Bot.on :message do |message|
+  end
 end
 
 welcome
