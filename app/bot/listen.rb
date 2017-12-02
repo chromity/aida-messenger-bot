@@ -178,9 +178,9 @@ def setup_account
       text: "Hi #{name}, Based on your answers, it's better to be sure for your future. Here are
       my suggestions on which things you should invest as early as now!")
 
-    message.typing_on
-    menu
     end
+    menu
+
   end
 end
 
