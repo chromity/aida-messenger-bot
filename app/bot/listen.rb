@@ -241,7 +241,7 @@ def menu
       goal = message.text
 
       message.reply(
-        text: "Get Insurance?",
+        text: "Interested in taking Insurance Plan?",
         quick_replies: [
           {
             content_type: 'text',
@@ -259,7 +259,7 @@ def menu
       Bot.on :message do |message|
         get_insurance = message.text
 
-        message.reply(text: "How much percentage of Income?")
+        message.reply(text: "How much percentage of your current allowance/income do you want to allocate in this kind of plan?")
         Bot.on :message do |message|
           income_percentage = message.text
 
