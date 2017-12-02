@@ -32,13 +32,53 @@ def get_education
   Bot.on :message do |message|
     message.reply(
       text: 'What is your highest educational attainment?',
-      quick_replies: User.educational_attachments.keys.map{ |k|
+      quick_replies: [
         {
            content_type: 'text',
-           title: k,
-           payload: k
+           title: "Primary School",
+           payload: "Primary School"
+        },
+        {
+           content_type: 'text',
+           title: "Grade School",
+           payload: "Grade School"
+        },
+        {
+           content_type: 'text',
+           title: "Junior High School",
+           payload: "Junior High School"
+        },
+        {
+           content_type: 'text',
+           title: "Senior High School",
+           payload: "Senior High School"
+        },
+        {
+           content_type: 'text',
+           title: "Vocational Course",
+           payload: "Vocational Course"
+        },
+        {
+           content_type: 'text',
+           title: "Associate's Degree",
+           payload: "Associate's Degree"
+        },
+        {
+           content_type: 'text',
+           title: "Bachelor's Degree",
+           payload: "Bachelor's Degree"
+        },
+        {
+           content_type: 'text',
+           title: "Master's Degree",
+           payload: "Master's Degree"
+        },
+        {
+           content_type: 'text',
+           title: "Doctorate",
+           payload: "Doctorate"
         }
-      })
+      }])
 
     Bot.on :postback do |postback|
       message.reply(text: "HEH")
