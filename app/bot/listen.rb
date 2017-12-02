@@ -24,47 +24,46 @@ def get_full_name
   Bot.on :message do |message|
     name = message.text
     message.reply(text: "Thank you #{name}. Now, please answer some questions to get started.")
+    message.typing_on
 
     message.reply(
-      attachment: {
-        type: 'template',
-        payload: {
-          template_type: 'button', # change this
-          text: "Enter your highest education attainment",
-          buttons: [
-            { type: 'postback', title: "Elementary", payload: "Elementary" },
-            { type: 'postback', title: "Senior High School", payload: "Senior High School"},
-            { type: 'postback', title: "College", payload: "College"}
-          ]
-        }
-      }
-    )
-
-    Bot.on :postback do |postback|
-      get_health_condition
-    end
-  end
-end
-
-def get_health_condition
-  Bot.on :message do |message|
-    message.reply(
-      text: "Enter your health condition",
+      text: "Enter your highest educational background",
       quick_replies: [
         {
           content_type: 'text',
-          title: 'Poor',
-          payload: 'Poor'
+          title: 'Elementary',
+          payload: 'Elementary'
         }
       ]
     )
 
     Bot.on :message do |message|
-        payload = message.text
+        educational_background = message.text
+
         message.reply(text: "Enter your current income:")
-        get_income
+
+        Bot.on :message do |message|
+          income = message.text
+
+          message.reply(
+            text: "Enter your health condition",
+            quick_replies: [
+              {
+                content_type: 'text',
+                title: 'Poor',
+                payload: 'Poor'
+              }
+            ]
+          )
+
+
+          Bot.on :message do |message|
+              health = message.text
+              message.reply(text: "Enter your current income:")
+              get_income
+          end
+        end
     end
-  end
 end
 
 
