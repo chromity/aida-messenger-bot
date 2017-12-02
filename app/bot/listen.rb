@@ -44,9 +44,9 @@ def get_education
         }
       }
     )
-
-    get_education_postback()
   end
+
+  get_education_postback()
 end
 
 def get_education_postback
