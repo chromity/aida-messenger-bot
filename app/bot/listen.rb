@@ -15,15 +15,28 @@ Facebook::Messenger::Profile.set({
 
 def welcome
   Bot.on :message do |message|
-    message.reply(text: 'Hello, to get started please enter your full name.')
-    get_full_name()
+    @user = User.find_by(messenger_id: message.sender[:id])
+    if @user.present?
+      if @user.name.present?
+        message.reply(text: "Welcome back, #{@user.name}!")
+      else
+        message.reply(text: 'Welcome back, to get started please enter your full name.')
+        get_full_name()
+      end
+    else
+      @user = User.create(messenger_id: message.sender[:id])
+      message.reply(text: 'Hello, to get started please enter your full name.')
+      get_full_name()
+    end
   end
 end
 
 def get_full_name
   Bot.on :message do |message|
     name = message.text
-    message.reply(text: "Thank you #{name}.")
+    @user = User.find_by(messenger_id: message.sender[:id])
+    @user.update(name: name)
+    message.reply(text: "Thank you #{name}!")
 
     message.typing_on
     message.reply(text: "Please answer few questions to continue.")
@@ -40,8 +53,8 @@ def get_full_name
         },
         {
           content_type: 'text',
-          title: 'Highschool',
-          payload: 'Highschool'
+          title: 'Senior High School',
+          payload: 'SHS'
         },{
           content_type: 'text',
           title: 'College',
@@ -49,13 +62,24 @@ def get_full_name
         }
       ]
     )
+
     Bot.on :message do |message|
-      educational_background = message.text
+      @user = User.find_by(messenger_id: message.sender[:id])
+
+      educational_background =  case message.text
+                                when "Elementary" then "Grade School"
+                                when "SHS"        then "Senior High School"
+                                when "College"    then "Bachelor's Degree"
+                                end
+
+      @user.update(educational_attachment: educational_background)
 
       message.reply(text: "Enter your total current allowances or income")
 
       Bot.on :message do |message|
         income = message.text
+        @user = User.find_by(messenger_id: message.sender[:id])
+        @user.update(income: income.to_i)
 
         sleep 1
 
@@ -81,11 +105,20 @@ def get_full_name
         )
 
         Bot.on :message do |message|
-          health = message.text
+          health =  case message.text
+                    when "Poor" then "Grade School"
+                    when "Fair" then "Fair Health Condition"
+                    when "Good" then "Good Health Condition"
+                    end          
+          @user = User.find_by(messenger_id: message.sender[:id])
+          @user.update(health_condition: health)
+
           message.reply(text: "Please enter your monthly expense:")
 
           Bot.on :message do |message|
             expense = message.text
+            @user = User.find_by(messenger_id: message.sender[:id])
+            @user.update(expense: expense.to_i)
 
             sleep 1
 
@@ -163,9 +196,7 @@ def setup_account
   Bot.on :message do |message|
     have_union = message.text
 
-
     #setup union bank account here
-
 
     message.reply(
       text: "Ready to take a risk? Don't worry, I'll be your partner to help you be successful. Want to know what you can get after investment?",
