@@ -441,7 +441,6 @@ def final_invest_process
     #insert coins etc
   end
 end
-end
 
 def forcasted
   Bot.on :messages do |messages|
