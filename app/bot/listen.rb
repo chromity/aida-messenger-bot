@@ -402,11 +402,11 @@ def final_invest_process
 
     message.reply(
       text: 'Open Unionbank to start investing now?',
-      quick_replies = [
+      quick_replies: [
         {
-          content_type = 'text',
-          title = "Sign-in",
-          payload = "Sign-in"
+          content_type: 'text',
+          title: "Sign-in",
+          payload: "Sign-in"
         }
       ]
     )
