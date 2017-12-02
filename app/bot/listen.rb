@@ -125,7 +125,7 @@ def main_process
 
         Bot.on :message do |message|
           health =  case message.text
-                    when "Poor" then "Grade School"
+                    when "Poor" then "Poor Health Condition"
                     when "Fair" then "Fair Health Condition"
                     when "Good" then "Good Health Condition"
                     end
