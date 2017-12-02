@@ -35,9 +35,11 @@ def get_education
         type: 'template',
         payload: {
           template_type: 'button', # change this
-          text: "Bachelor's Degree",
+          text: "Enter your highest education attainment",
           buttons: [
-            { type: 'postback', title: "Bachelor's Degree", payload: "Bachelor's Degree" }
+            { type: 'postback', title: "Elementary", payload: "Elementary" },
+            { type: 'postback', title: "High School", payload: "High School"},
+            { type: 'postback', title: "College", payload: "College"}
           ]
         }
       }
