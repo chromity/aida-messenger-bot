@@ -66,10 +66,18 @@ def get_health_condition
 
     Bot.on :message do |message|
         payload = message.text
-        message.reply(text: "#{payload}")
+        message.reply(text: "Enter your current income:")
+        get_income
     end
   end
 end
 
+
+def get_income
+  Bot.on :message do |message|
+    income = message.text
+    message.reply(text: "#{income}")
+  end
+end
 
 welcome
