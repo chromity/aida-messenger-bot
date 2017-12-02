@@ -303,4 +303,5 @@ def final_invest_process
     #process
     #insert coins etc
   end
+end
 welcome
