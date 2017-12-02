@@ -24,7 +24,7 @@ def get_full_name
   Bot.on :message do |message|
     name = message.text
     message.reply(text: "Thank you #{name}.")
-    message.reply(text: "Please answer a few questions to continue.")
+    message.reply(text: "Please answer few questions to continue.")
 
     message.typing_on
 
@@ -42,13 +42,13 @@ def get_full_name
     Bot.on :message do |message|
       educational_background = message.text
 
-      message.reply(text: "Enter your current income")
+      message.reply(text: "")
 
       Bot.on :message do |message|
         income = message.text
 
         message.reply(
-          text: "Select your health condition",
+          text: "Good health is not something we can buy. However, it can be an extremely valuable savings account. So should not take your health for granted. To further give you good advise, I would like to ask your health condition",
           quick_replies: [
             {
               content_type: 'text',
@@ -66,7 +66,7 @@ def get_full_name
             expense = message.text
 
             message.reply(
-              text: "Are you familiar with stocks?",
+              text: "Are you familiar with Stocks?",
               quick_replies: [
                 {
                   content_type: 'text',
@@ -137,7 +137,7 @@ def setup_account
     have_union = message.text
 
     message.reply(
-      text: "Continue to predictions?",
+      text: "Ready to take a risk? Don't worry, I'll be your partner to help you be successful. Want to know what you can get after investment?",
       quick_replies: [
         {
           content_type: 'text',
