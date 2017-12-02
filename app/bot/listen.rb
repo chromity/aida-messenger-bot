@@ -179,7 +179,7 @@ def setup_account
 
     Bot.on :message do |message|
     message.reply(
-      text: "Hi #{name}, Based on your answers, it's better to be sure for your future. Here are
+      text: "Hi, based on your answers, it's better to be sure for your future. Here are
       my suggestions on which things you should invest as early as now!")
 
     message.typing_on
@@ -238,8 +238,69 @@ def menu
 
     Bot.on :message do |message|
       goal = message.text
+
+      message.reply(
+        text: "Get Insurance?",
+        quick_replies: [
+          {
+            content_type: 'text',
+            title: 'Yes',
+            payload: 'Yes'
+          },
+          {
+            content_type: 'text',
+            title: 'No',
+            payload: 'No'
+          }
+        ]
+      )
+
+      Bot.on :message do |message|
+        get_insurance = message.text
+
+        message.reply(text: "How much percentage of Income?")
+        Bot.on :message do |message|
+          income_percentage = message.text
+
+          message.reply(
+            text: " ",
+            quick_replies: [
+              {
+                content_type: 'text',
+                title: 'Stock',
+                payload: 'Stock'
+              },
+              {
+                content_type: 'text',
+                title: 'Cryptocurrency',
+                payload: 'Cryptocurrency'
+              },
+              {
+                content_type: 'text',
+                title: 'Loan',
+                payload: 'Loan'
+
+              },
+              {
+                content_type: 'text',
+                title: 'Banking',
+                payload: 'Banking'
+              }
+            ]
+          )
+
+          final_invest_process
+        end
+      end
     end
   end
 end
 
+def final_invest_process
+  Bot.on :messages do |message|
+    invest_through = message.text
+
+    #process
+    #insert coins etc
+  end
 welcome
