@@ -89,8 +89,7 @@ def get_income(idx, rep)
     },
     message: {
       text: "Enter your current income"
-    },
-    message_type: Facebook::Messenger::Bot::MessageType::UPDATE
+    }
     }, access_token: ENV['ACCESS_TOKEN'])
 
   Bot.on :message do |message|
