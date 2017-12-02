@@ -122,7 +122,9 @@ def get_full_name
                 )
 
               setup_account
+              end
             end
+          end
         end
       end
     end
