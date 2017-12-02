@@ -28,8 +28,18 @@ module AidaMessengerBot
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.eager_load_paths += Dir[Rails.root.join('lib', '*')]
+    config.eager_load_paths += Dir[Rails.root.join('lib', 'modules', '*')]
+    config.eager_load_paths += Dir[Rails.root.join('lib', 'processors', '*')]
+
+    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
 
     config.paths.add File.join("app", "bot"), glob: File.join("**","*.rb")
     config.autoload_paths += Dir[Rails.root.join("app", "bot", "*")]
+  
+    config.time_zone = 'Hong Kong'    
+    config.active_record.default_timezone = :utc
+
   end
 end
