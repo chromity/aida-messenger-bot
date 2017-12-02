@@ -42,7 +42,7 @@ def get_education
   end
 
   Bot.on :postback do |postback|
-    message.reply(text: "#{postback.payload}")
+    message.reply(text: "HEH")
   end
 end
 
