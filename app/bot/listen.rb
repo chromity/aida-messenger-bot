@@ -52,7 +52,7 @@ def get_full_name
     Bot.on :message do |message|
       educational_background = message.text
 
-      message.reply(text: "")
+      message.reply(text: "Enter your total current allowances or income")
 
       Bot.on :message do |message|
         income = message.text
