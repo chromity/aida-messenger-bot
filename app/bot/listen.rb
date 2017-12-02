@@ -16,11 +16,10 @@ Facebook::Messenger::Profile.set({
 def welcome
   Bot.on :message do |message|
     message.reply(text: 'Hello, to get started please enter your full name.')
-    # get_full_name
+    get_full_name()
   end
 end
 
-=begin
 def get_full_name
   Bot.on :message do |message|
     name = message.text
@@ -46,6 +45,6 @@ def get_education
     message.reply(text: "#{postback.payload}")
   end
 end
-=end
+
 
 welcome
