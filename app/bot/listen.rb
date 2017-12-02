@@ -68,14 +68,13 @@ def get_health_condition
         }
       }
     )
-  end
 
-  get_health_postback()
+    get_health_postback()
+  end
 end
 
 def get_health_postback
   Bot.on :postback do |postback|
-    message.reply(text: "HEH")
   end
 end
 
