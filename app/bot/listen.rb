@@ -53,49 +53,21 @@ def get_education
 end
 
 def get_health_condition
-  Bot.on :message do |message|
-    message.reply(
-      attachment: {
-        type: 'template',
-        payload: {
-          template_type: 'button', # change this
-          text: "Enter health condition",
-          buttons: [
-            { type: 'postback', title: "Poor", payload: "Poor" },
-            { type: 'postback', title: "Fair", payload: "Fair"},
-            { type: 'postback', title: "Good", payload: "Good"}
-          ]
-        }
+  message.reply(
+    text: "Enter your health condition",
+    quick_replies: [
+      {
+        content_type: 'text',
+        title: 'Poor',
+        payload: 'Poor'
       }
-    )
+    ]
 
-    get_health_postback()
-  end
-end
-
-def get_health_postback
-  Bot.on :postback do |postback|
-    id = postback.sender
-    rep = postback.recipient
-    get_income(id, rep)
-  end
-end
-
-
-def get_income(idx, rep)
-  Bot.deliver({
-    recipient: {
-      id: idx
-    },
-    message: {
-      text: "Enter your current income"
-    }
-    }, access_token: ENV['ACCESS_TOKEN'])
-
-  Bot.on :message do |message|
-    income = message.text
-    message.reply(text: "#{income}")
-  end
+    Bot.on :message do |message|
+      payload = message.text
+      message.reply(text: "#{payload}")
+    end
+  )
 end
 
 
