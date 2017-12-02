@@ -28,6 +28,17 @@ class UnionbankProcessor
         end
       end
 
+      def get_hmac_header(url, body = nil)
+        nonce = HmacProcessor.new.nonce
+        header = {}
+        header['ACCESS_SIGNATURE'] = HmacProcessor.signature(url, nonce, ENV["UNIONBANK_SECRET_KEY"], body)
+        header['ACCESS_KEY'] = ENV["UNIONBANK_CLIENT_ID"]
+        header['ACCESS_NONCE'] = nonce
+        header['Content-Type'] = 'application/json;charset=UTF-8'
+        header['Accept'] = 'application/json'
+        header
+      end
+
       def sandbox_url
         ROOT_PATH + SANDBOX
       end
