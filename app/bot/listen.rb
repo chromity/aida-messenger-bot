@@ -32,7 +32,7 @@ def get_education
   Bot.on :message do |message|
     message.reply(
       text: 'What is your highest educational attainment?',
-      quick_replies: User.educational_attainments.keys.map{ |k|
+      quick_replies: User.educational_attachments.keys.map{ |k|
         {
            content_type: 'text',
            title: k,
