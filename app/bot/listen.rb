@@ -109,7 +109,7 @@ def get_full_name
                     when "Poor" then "Grade School"
                     when "Fair" then "Fair Health Condition"
                     when "Good" then "Good Health Condition"
-                    end          
+                    end
           @user = User.find_by(messenger_id: message.sender[:id])
           @user.update(health_condition: health)
 
@@ -208,21 +208,13 @@ def setup_account
         }
       ]
     )
-
-    Bot.on :message do |message|
-      message.reply(
-        text: "Hi, based on your answers, it's better to be sure for your future. Here are
-      my suggestions on which things you should invest as early as now!")
-      message.typing_on
-      menu
-    end
   end
 end
 
 def menu
   Bot.on :message do |message|
     message.reply(
-      text: " ",
+    text: "Hi, based on your answers, it's better to be sure for your future. Here are my suggestions on which things you should invest as early as now!",
       quick_replies: [
         {
           content_type: 'text',
@@ -313,7 +305,7 @@ def menu
                 funeral: (income_percentage/100),
                 death: (income_percentage/100),
                 education: (income_percentage/100)
-              )              
+              )
             end
 
             message.reply(
@@ -359,9 +351,9 @@ def final_invest_process
     case message.text
     when "Stock" then @user.insurances.first.update(type: "Stock")
     when "Cryptocurrency" then @user.insurances.first.update(type: "Crypto")
-    end          
+    end
 
-    
+
     #process
     #insert coins etc
   end
