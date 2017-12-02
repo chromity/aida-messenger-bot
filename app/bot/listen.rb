@@ -63,11 +63,11 @@ def get_health_condition
         }
       ]
     )
-  end
 
-  Bot.on :message do |message|
-      payload = message.text
-      message.reply(text: "#{payload}")
+    Bot.on :message do |message|
+        payload = message.text
+        message.reply(text: "#{payload}")
+    end
   end
 end
 
