@@ -23,13 +23,8 @@ end
 def get_full_name
   Bot.on :message do |message|
     name = message.text
-    message.reply(text: "Thank you #{name}. Now, please answer some questions to get started. Type Y to start.")
-    get_education()
-  end
-end
+    message.reply(text: "Thank you #{name}. Now, please answer some questions to get started.")
 
-def get_education
-  Bot.on :message do |message|
     message.reply(
       attachment: {
         type: 'template',
