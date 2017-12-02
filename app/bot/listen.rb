@@ -24,6 +24,7 @@ def get_full_name
   Bot.on :message do |message|
     name = message.text
     message.reply(text: "Thank you #{name}.")
+    message.typing_on
     message.reply(text: "Please answer a few questions to continue.")
 
     message.typing_on
@@ -186,6 +187,7 @@ end
 
 def menu
   Bot.on :message do |message|
+    
   end
 end
 
