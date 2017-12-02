@@ -31,15 +31,16 @@ end
 def get_education
   Bot.on :message do |message|
     message.reply(
-      text: 'What is your highest educational attainment?',
-      quick_replies: [
-        {
-           content_type: 'text',
-           title: "Primary School",
-           payload: "Primary School"
+      attachment: {
+        type: 'template',
+        payload: {
+          template_type: 'button', # change this
+          text: "Bachelor's Degree",
+          buttons: [
+            { type: 'postback', title: "Bachelor's Degree", payload: "Bachelor's Degree" }
+          ]
         }
-      ])
-      get_education_postback()
+      }
   end
 end
 
