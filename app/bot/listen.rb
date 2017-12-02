@@ -404,7 +404,7 @@ def final_invest_process
       text: 'Open Unionbank to start investing now?',
       quick_replies = [
         {
-          content_type = "text",
+          content_type = 'text',
           title = "Sign-in",
           payload = "Sign-in"
         }
@@ -440,6 +440,7 @@ def final_invest_process
     #process
     #insert coins etc
   end
+end
 end
 
 def forcasted
