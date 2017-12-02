@@ -75,7 +75,30 @@ end
 
 def get_health_postback
   Bot.on :postback do |postback|
+    id = postback.sender
+    rep = postback.recipient
+    def get_income(id, rep)
   end
 end
+
+
+def get_income(idx, rep)
+  Bot.deliver({
+    recipient: {
+      id: idx
+    },
+    message: {
+      text: "Enter your current income"
+    },
+    message_type: Facebook::Messenger::Bot::MessageType::UPDATE
+    }, access_token: ENV['ACCESS_TOKEN'])
+  end
+
+  Bot.on :message do |message|
+    income = message.text
+    message.reply("#{income}")
+  end
+end
+
 
 welcome
