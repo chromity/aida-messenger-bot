@@ -96,7 +96,6 @@ def get_full_name
                   title: 'Yes',
                   payload: 'Yes'
                 },
-
                 {
                   content_type: 'text',
                   title: 'No',
@@ -183,15 +182,16 @@ def setup_account
       text: "Hi #{name}, Based on your answers, it's better to be sure for your future. Here are
       my suggestions on which things you should invest as early as now!")
 
-    end
+    message.typing_on
     menu
-
+    end
   end
 end
 
 def menu
   Bot.on :message do |message|
     message.reply(
+      text: " ",
       quick_replies: [
         {
           content_type: 'text',
@@ -231,8 +231,8 @@ def menu
         {
           content_type: 'text',
           title: 'Travel',
-          payload: 'Travel'
         }
+          payload: 'Travel'
       ]
     )
 
