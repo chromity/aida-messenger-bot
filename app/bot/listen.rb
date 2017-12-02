@@ -24,6 +24,7 @@ def get_full_name
   Bot.on :message do |message|
     name = message.text
     message.reply(text: "Thank you #{name}. Now, please answer some questions to get started.")
+
     message.typing_on
 
     message.reply(
@@ -56,13 +57,105 @@ def get_full_name
           ]
         )
 
-
         Bot.on :message do |message|
-            health = message.text
+          health = message.text
+          message.reply(text: "Please enter your expense:")
+
+          Bot.on :message do |message|
+            expense = message.text
+
+            message.reply(
+              text: "Familiar with Stocks?",
+              quick_replies: [
+                {
+                  content_type: 'text',
+                  title: 'Yes',
+                  payload: 'Yes'
+                },
+
+                {
+                  content_type: 'text',
+                  title: 'No',
+                  payload: 'No'
+                }
+              ]
+            )
+
+            Bot.on :message do |message|
+              stocks = message.text
+
+              message.reply(
+                text: "Familiar with Crypto?"
+                quick_replies: [
+                  {
+                    content_type: 'text',
+                    title: 'Yes',
+                    payload: 'Yes'
+                  },
+
+                  {
+                    content_type: 'text',
+                    title: 'No',
+                    payload: 'No'
+                  }
+                ]
+              )
+
+              Bot.on :message do |message|
+                crypto = message.text
+
+                message.reply(
+                  text: "Do you have a Unionbank Account?"
+                  quick_replies: [
+                    {
+                      content_type: 'text',
+                      title: 'Yes',
+                      payload: 'Yes'
+                    },
+
+                    {
+                      content_type: 'text',
+                      title: 'No',
+                      payload: 'No'
+                    }
+                  ]
+                )
+
+              setup_account
+            end
+          end
         end
       end
     end
   end
+end
+
+def setup_account
+  Bot.on :message do |message|
+    have_union = message.text
+
+    message.reply(
+      text: "Continue to predictions?"
+      quick_replies: [
+        {
+          content_type: 'text',
+          title: 'Yes',
+          payload: 'Yes'
+        },
+
+        {
+          content_type: 'text',
+          title: 'No',
+          payload: 'No'
+        }
+      ]
+    )
+
+    menu
+  end
+end
+
+def menu
 end
 
 welcome
