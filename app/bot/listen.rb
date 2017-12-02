@@ -96,7 +96,7 @@ def get_income(idx, rep)
 
   Bot.on :message do |message|
     income = message.text
-    message.reply("#{income}")
+    message.reply(text: "#{income}")
   end
 end
 
