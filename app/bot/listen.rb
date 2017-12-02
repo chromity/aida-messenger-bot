@@ -44,11 +44,11 @@ def get_education
         }
       }
     )
-  end
 
-  Bot.on :postback do |postback|
-    message.reply(text: "HEH")
-    get_health_condition()
+    Bot.on :postback do |postback|
+      message.reply(text: "HEH")
+      get_health_condition()
+    end
   end
 end
 
