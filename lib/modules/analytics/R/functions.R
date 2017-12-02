@@ -66,6 +66,19 @@ forecaster <- function(coin,n,days){
   }
 }
 
+stocks <- function(days){
+  packages <- c("forecast")
+  if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
+    install.packages(setdiff(packages, rownames(installed.packages())))  
+  }
+  library(data.table)
+  df <- fread("http://52.77.229.79/data.csv")
+  factor(df$symbol)
+  tail(ma(na.omit(df$close[df$type=="Stock"]),days),n=1)
+}
+
+ma <- function(x,n=5){filter(x,rep(1/n,n), sides=2)}
+
 bitcoin <- function(days){
   forecaster("BTC",668,days)
 }
@@ -92,6 +105,10 @@ housing <- function(initial,percentage, investment, days){
   else if(investment=="BCH"){
     percentage * returned_value(initial,bitcash(days))    
   }
+
+  else if(investment=="STOCKS"){
+    percentage * returned_value(initial,stocks(days))
+  }
 }
 
 sickness <- function(initial,percentage, investment, days){
@@ -103,6 +120,9 @@ sickness <- function(initial,percentage, investment, days){
   }
   else if(investment=="BCH"){
     percentage * returned_value(initial,bitcash(days))    
+  }
+  else if(investment=="STOCKS"){
+    percentage * returned_value(initial,stocks(days))
   }
 }
 
@@ -116,6 +136,9 @@ disability <- function(initial,percentage, investment, days){
   else if(investment=="BCH"){
     percentage * returned_value(initial,bitcash(days))    
   }
+  else if(investment=="STOCKS"){
+    percentage * returned_value(initial,stocks(days))
+  }
 }
 
 maternity <- function(initial,percentage, investment, days){
@@ -127,6 +150,9 @@ maternity <- function(initial,percentage, investment, days){
   }
   else if(investment=="BCH"){
     percentage * returned_value(initial,bitcash(days))    
+  }
+  else if(investment=="STOCKS"){
+    percentage * returned_value(initial,stocks(days))
   }
 }
 
@@ -140,6 +166,9 @@ retirement <- function(initial,percentage, investment, days){
   else if(investment=="BCH"){
     percentage * returned_value(initial,bitcash(days))    
   }
+  else if(investment=="STOCKS"){
+    percentage * returned_value(initial,stocks(days))
+  }
 }
 
 funeral <- function(initial,percentage, investment, days){
@@ -151,6 +180,9 @@ funeral <- function(initial,percentage, investment, days){
   }
   else if(investment=="BCH"){
     percentage * returned_value(initial,bitcash(days))    
+  }
+  else if(investment=="STOCKS"){
+    percentage * returned_value(initial,stocks(days))
   }
 }
 
@@ -164,6 +196,9 @@ death <- function(initial,percentage, investment, days){
   else if(investment=="BCH"){
     percentage * returned_value(initial,bitcash(days))    
   }
+  else if(investment=="STOCKS"){
+    percentage * returned_value(initial,stocks(days))
+  }
 }
 
 education <- function(initial,percentage, investment, days){
@@ -175,5 +210,8 @@ education <- function(initial,percentage, investment, days){
   }
   else if(investment=="BCH"){
     percentage * returned_value(initial,bitcash(days))    
+  }
+  else if(investment=="STOCKS"){
+    percentage * returned_value(initial,stocks(days))
   }
 }
