@@ -406,9 +406,6 @@ def final_invest_process
     else menu
     end
 
-<<<<<<< HEAD
-=======
-
     message.reply(
       text: 'Open Unionbank to start investing now?',
       quick_replies: [
@@ -465,7 +462,7 @@ def report message
               else
                 [1,7,30]
               end
-            
+
   tally = if @user.insurances.first.type == "Stock"
             "" + timelines.each do |t|
               "For #{t} days - #{Analytics::Methods.stocks(t)}"
@@ -475,7 +472,7 @@ def report message
               "Bitcoin - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n"
               "Etherium - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n"
               "Bitcoin Cash - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n"
-            end            
+            end
           end
   percentage = @user.insurances.first.sickness
   plans = if @user.insurances.first.type == "Stock"
