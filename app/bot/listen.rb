@@ -18,7 +18,7 @@ def welcome
     @user = User.find_by(messenger_id: message.sender[:id])
     if @user.present?
       if @user.name.present?
-        if @user.insurances.present?
+        unless @user.insurances.present?
           message.reply(text: "Welcome back, #{@user.name}!",
           quick_replies: [
             {content_type: 'text',
@@ -28,19 +28,14 @@ def welcome
           ])
           main_process
         else
-          message.reply(
-            text: "Welcome back, #{@user.name}!",
-              quick_replies: [
-              {content_type: 'text',
-               title: "Want new updates, #{@user.name}?",
-               payload: "Sure, let's start!"
-              }
-            ])
-            Bot.on :message do |message|
-              answer = message.text
-              report message
-            end            
-          end
+          message.reply(text: "Welcome back, #{@user.name}!\n Do you want new updates?",
+          quick_replies: [
+            {content_type: 'text',
+             title: "Sure, let's start!",
+             payload: "Sure, let's start!"
+            }
+          ])
+          report message
         end
       else
         message.reply(text: 'Welcome back, to get started please enter your full name.')
