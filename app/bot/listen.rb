@@ -479,7 +479,7 @@ def report message
               "Bitcoin - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n" +
               "Etherium - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n" +
               "Bitcoin Cash - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n"
-            }.joins("\n")
+            }.join("\n")
   percentage = @user.insurances.first.sickness
   plans = "Stocks - For #{30} days - #{Analytics::Methods.housing(@user.income, percentage, 'STOCKS', 30)}\n" +
               "Stocks - For #{30} days - #{Analytics::Methods.sickness(@user.income, percentage, 'STOCKS', 30)}\n" +
