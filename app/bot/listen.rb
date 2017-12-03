@@ -299,6 +299,7 @@ def menu
         ]
       )
 
+      Bot.on :message do |messages|
       if message.text == "Yes"
         Bot.on :message do |message|
           get_insurance = message.text
@@ -388,6 +389,8 @@ def menu
     end
   end
 end
+end
+
 
 def final_invest_process
   Bot.on :messages do |message|
