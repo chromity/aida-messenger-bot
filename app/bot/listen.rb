@@ -28,14 +28,11 @@ def welcome
           ])
           main_process
         else
-          message.reply(text: "Welcome back, #{@user.name}!",
-          message.typing_on
-          Bot.on :message do |message|
-            message.reply(
-              text: "Want new updates, #{name}?",
+          message.reply(
+            text: "Welcome back, #{@user.name}!",
               quick_replies: [
               {content_type: 'text',
-               title: "Sure!",
+               title: "Want new updates, #{@user.name}?",
                payload: "Sure, let's start!"
               }
             ])
