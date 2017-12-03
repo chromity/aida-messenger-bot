@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   attr_accessor :nickname
-
+  has_many :insurances
+  
   enum educational_attachment: {
     "Primary School":         1,
     "Grade School":           2,
