@@ -475,7 +475,7 @@ def report message
               end
 
   tally =   timelines.each do |t|
-              "Stocks - For #{t} days - #{Analytics::Methods.stocks(t)}" + 
+              "Stocks - For #{t} days - #{Analytics::Methods.stocks(t)}\n" + 
               "Bitcoin - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n" +
               "Etherium - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n" +
               "Bitcoin Cash - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n" +
