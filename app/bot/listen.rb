@@ -18,14 +18,33 @@ def welcome
     @user = User.find_by(messenger_id: message.sender[:id])
     if @user.present?
       if @user.name.present?
-        message.reply(text: "Welcome back, #{@user.name}!",
-        quick_replies: [
-          {content_type: 'text',
-           title: "Sure, let's start!",
-           payload: "Sure, let's start!"
-          }
-        ])
-        main_process
+        if @user.insurances.present?
+          message.reply(text: "Welcome back, #{@user.name}!",
+          quick_replies: [
+            {content_type: 'text',
+             title: "Sure, let's start!",
+             payload: "Sure, let's start!"
+            }
+          ])
+          main_process
+        else
+          message.reply(text: "Welcome back, #{@user.name}!",
+          message.typing_on
+          Bot.on :message do |message|
+            message.reply(
+              text: "Want new updates, #{name}?",
+              quick_replies: [
+              {content_type: 'text',
+               title: "Sure!",
+               payload: "Sure, let's start!"
+              }
+            ])
+            Bot.on :message do |message|
+              answer = message.text
+              report message
+            end            
+          end
+        end
       else
         message.reply(text: 'Welcome back, to get started please enter your full name.')
         get_full_name()
@@ -450,6 +469,7 @@ end
 
 def forecasted
   Bot.on :messages do |messages|
+    report message
   end
 end
 
