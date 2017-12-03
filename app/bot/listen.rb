@@ -475,25 +475,20 @@ def report message
 
   tally = if @user.insurances.first.type == "Stock"
             "" + timelines.each do |t|
-              "For #{t} days - #{Analytics::Methods.stocks(t)}"
-            end
-          else
-            "" + timelines.each do |t|
+              "Stocks - For #{t} days - #{Analytics::Methods.stocks(t)}"
               "Bitcoin - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n"
               "Etherium - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n"
               "Bitcoin Cash - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n"
             end
           end
   percentage = @user.insurances.first.sickness
-  plans = if @user.insurances.first.type == "Stock"
-              "Stocks - For #{30} days - #{Analytics::Methods.housing(@user.income, percentage, 'STOCKS', 30)}\n" +
+  plans = "Stocks - For #{30} days - #{Analytics::Methods.housing(@user.income, percentage, 'STOCKS', 30)}\n" +
               "Stocks - For #{30} days - #{Analytics::Methods.sickness(@user.income, percentage, 'STOCKS', 30)}\n" +
               "Stocks - For #{30} days - #{Analytics::Methods.disability(@user.income, percentage, 'STOCKS', 30)}\n" +
               "Stocks - For #{30} days - #{Analytics::Methods.maternity(@user.income, percentage, 'STOCKS', 30)}\n" +
               "Stocks - For #{30} days - #{Analytics::Methods.retirement(@user.income, percentage, 'STOCKS', 30)}\n" +
               "Stocks - For #{30} days - #{Analytics::Methods.funeral(@user.income, percentage, 'STOCKS', 30)}\n" +
-              "Stocks - For #{30} days - #{Analytics::Methods.education(@user.income, percentage, 'STOCKS', 30)}\n"
-          elsif @user.insurances.first.type == "Crypto"
+              "Stocks - For #{30} days - #{Analytics::Methods.education(@user.income, percentage, 'STOCKS', 30)}\n" +
               "Cryptocurrency - For #{30} days - #{Analytics::Methods.housing(@user.income, percentage, 'BTC', 30)}\n" +
               "Cryptocurrency - For #{30} days - #{Analytics::Methods.sickness(@user.income, percentage, 'BTC', 30)}\n" +
               "Cryptocurrency - For #{30} days - #{Analytics::Methods.disability(@user.income, percentage, 'BTC', 30)}\n" +
@@ -501,7 +496,6 @@ def report message
               "Cryptocurrency - For #{30} days - #{Analytics::Methods.retirement(@user.income, percentage, 'BTC', 30)}\n" +
               "Cryptocurrency - For #{30} days - #{Analytics::Methods.funeral(@user.income, percentage, 'BTC', 30)}\n" +
               "Cryptocurrency - For #{30} days - #{Analytics::Methods.education(@user.income, percentage, 'BTC', 30)}\n"
-          end
   output = "Your report for today:\n" + tally + plans
 end
 welcome
