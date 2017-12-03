@@ -364,7 +364,7 @@ def menu
                   disability: (income_percentage.to_i/100),
                   maternity: (income_percentage.to_i/100),
                   retirement: (income_percentage.to_i/100),
-                  funeral: (income_percentage/100),
+                  funeral: (income_percentage.to_i/100),
                   death: (income_percentage.to_i/100),
                   education: (income_percentage.to_i/100)
                 )
