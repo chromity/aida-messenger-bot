@@ -31,7 +31,7 @@ def welcome
           message.reply(text: "Welcome back, #{@user.name}!\n Do you want new updates?",
           quick_replies: [
             {content_type: 'text',
-             title: "Sure, let's start!",
+             title: "Yes!",
              payload: "Sure, let's start!"
             }
           ])
@@ -348,23 +348,23 @@ def menu
               @user = User.find_by(messenger_id: message.sender[:id])
               if @user.insurances.present?
                 @user.insurances.first.update(
-                  sickness: (income_percentage/100),
-                  disability: (income_percentage/100),
-                  maternity: (income_percentage/100),
-                  retirement: (income_percentage/100),
-                  funeral: (income_percentage/100),
-                  death: (income_percentage/100),
-                  education: (income_percentage/100)
+                  sickness: (income_percentage.to_i/100),
+                  disability: (income_percentage.to_i/100),
+                  maternity: (income_percentage.to_i/100),
+                  retirement: (income_percentage.to_i/100),
+                  funeral: (income_percentage.to_i/100),
+                  death: (income_percentage.to_i/100),
+                  education: (income_percentage.to_i/100)
                 )
               else
                 @user.insurances.create(
-                  sickness: (income_percentage/100),
-                  disability: (income_percentage/100),
-                  maternity: (income_percentage/100),
-                  retirement: (income_percentage/100),
+                  sickness: (income_percentage.to_i/100),
+                  disability: (income_percentage.to_i/100),
+                  maternity: (income_percentage.to_i/100),
+                  retirement: (income_percentage.to_i/100),
                   funeral: (income_percentage/100),
-                  death: (income_percentage/100),
-                  education: (income_percentage/100)
+                  death: (income_percentage.to_i/100),
+                  education: (income_percentage.to_i/100)
                 )
               end
 
