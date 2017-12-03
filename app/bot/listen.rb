@@ -475,10 +475,10 @@ def report message
               end
 
   tally =   "" + timelines.each do |t|
-              "Stocks - For #{t} days - #{Analytics::Methods.stocks(t)}"
-              "Bitcoin - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n"
-              "Etherium - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n"
-              "Bitcoin Cash - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n"
+              "Stocks - For #{t} days - #{Analytics::Methods.stocks(t)}" + 
+              "Bitcoin - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n" +
+              "Etherium - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n" +
+              "Bitcoin Cash - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n" +
             end
   percentage = @user.insurances.first.sickness
   plans = "Stocks - For #{30} days - #{Analytics::Methods.housing(@user.income, percentage, 'STOCKS', 30)}\n" +
