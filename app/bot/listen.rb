@@ -474,12 +474,12 @@ def report message
                 [1,7,30]
               end
 
-  tally =   timelines.each do |t|
+  tally =   timelines.each{ |t|
               "Stocks - For #{t} days - #{Analytics::Methods.stocks(t)}\n" + 
               "Bitcoin - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n" +
               "Etherium - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n" +
-              "Bitcoin Cash - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n" +
-            end
+              "Bitcoin Cash - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n"
+            }.joins("\n")
   percentage = @user.insurances.first.sickness
   plans = "Stocks - For #{30} days - #{Analytics::Methods.housing(@user.income, percentage, 'STOCKS', 30)}\n" +
               "Stocks - For #{30} days - #{Analytics::Methods.sickness(@user.income, percentage, 'STOCKS', 30)}\n" +
