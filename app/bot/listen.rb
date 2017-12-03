@@ -173,7 +173,7 @@ def main_process
 
               if stocks == 'No'
                 message.reply(text: "A stock is a type of security that signifies ownership in a corporation and represents a claim on part of the corporation's assets and earnings.")
-
+              end
 
               message.reply(
                 text: "How about Cryptocurrency?",
@@ -415,7 +415,6 @@ def final_invest_process
     case message.text
     when "Stock" then @user.insurances.first.update(type: "Stock")
     when "Cryptocurrency" then @user.insurances.first.update(type: "Crypto")
-    else menu
     end
 
     message.reply(
@@ -455,8 +454,6 @@ def final_invest_process
       end
 
     end
-    #process
-    #insert coins etc
   end
 end
 
