@@ -371,7 +371,7 @@ def menu
               end
 
               message.reply(
-                text: " ",
+                text: "-",
                 quick_replies: [
                   {
                     content_type: 'text',
