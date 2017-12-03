@@ -459,7 +459,8 @@ end
 
 def forecasted
   Bot.on :message do |message|
-    report message
+    
+    message.reply(text: report(message)) 
   end
 end
 
@@ -473,14 +474,12 @@ def report message
                 [1,7,30]
               end
 
-  tally = if @user.insurances.first.type == "Stock"
-            "" + timelines.each do |t|
+  tally =   "" + timelines.each do |t|
               "Stocks - For #{t} days - #{Analytics::Methods.stocks(t)}"
               "Bitcoin - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n"
               "Etherium - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n"
               "Bitcoin Cash - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n"
             end
-          end
   percentage = @user.insurances.first.sickness
   plans = "Stocks - For #{30} days - #{Analytics::Methods.housing(@user.income, percentage, 'STOCKS', 30)}\n" +
               "Stocks - For #{30} days - #{Analytics::Methods.sickness(@user.income, percentage, 'STOCKS', 30)}\n" +
