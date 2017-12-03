@@ -171,7 +171,9 @@ def main_process
             Bot.on :message do |message|
               stocks = message.text
 
-              #insert stocks introduction here
+              if stocks == 'No'
+                message.reply(text: "A stock is a type of security that signifies ownership in a corporation and represents a claim on part of the corporation's assets and earnings.")
+
 
               message.reply(
                 text: "How about Cryptocurrency?",
