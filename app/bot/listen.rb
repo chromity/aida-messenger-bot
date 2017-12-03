@@ -474,12 +474,6 @@ def report message
                 [1,7,30]
               end
 
-  tally =   timelines.map{ |t|
-              "Stocks - For #{t} days - #{Analytics::Methods.stocks(t)}\n" + 
-              "Bitcoin - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n" +
-              "Etherium - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n" +
-              "Bitcoin Cash - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n"
-            }.join("\n")
   percentage = @user.insurances.first.sickness
   plans = "Stocks - For #{30} days - #{Analytics::Methods.housing(@user.income, percentage, 'STOCKS', 30)}\n" +
               "Stocks - For #{30} days - #{Analytics::Methods.sickness(@user.income, percentage, 'STOCKS', 30)}\n" +
@@ -495,6 +489,6 @@ def report message
               "Cryptocurrency - For #{30} days - #{Analytics::Methods.retirement(@user.income, percentage, 'BTC', 30)}\n" +
               "Cryptocurrency - For #{30} days - #{Analytics::Methods.funeral(@user.income, percentage, 'BTC', 30)}\n" +
               "Cryptocurrency - For #{30} days - #{Analytics::Methods.education(@user.income, percentage, 'BTC', 30)}\n"
-  output = "Your report for today:\n" + tally + plans
+  output = "Your report for today:\n" + plans
 end
 welcome
