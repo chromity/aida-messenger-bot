@@ -407,7 +407,7 @@ end
 
 
 def final_invest_process
-  Bot.on :messages do |message|
+  Bot.on :message do |message|
     invest_through = message.text
     @user = User.find_by(messenger_id: message.sender[:id])
 
@@ -428,12 +428,12 @@ def final_invest_process
       ]
     )
 
-    Bot.on :messages do |message|
+    Bot.on :message do |message|
       message.typing_on
       sleep 1
       message.reply(text: "Please enter the amount to cash-in")
 
-      Bot.on :messages do |message|
+      Bot.on :message do |message|
         amount = message.text
         message.typing_on
         sleep 1
@@ -460,7 +460,7 @@ def final_invest_process
 end
 
 def forecasted
-  Bot.on :messages do |messages|
+  Bot.on :message do |message|
     report message
   end
 end
