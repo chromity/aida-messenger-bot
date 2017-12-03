@@ -310,7 +310,7 @@ def menu
         ]
       )
 
-      Bot.on :message do |messages|
+      Bot.on :message do |message|
       if message.text == "Yes"
         Bot.on :message do |message|
           get_insurance = message.text
