@@ -326,6 +326,9 @@ def menu
 
           Bot.on :message do |message|
             plan = message.text
+            @user = User.find_by(messenger_id: message.sender[:id])
+            @user.update(goal: plan)
+
 
             message.reply(text: "How much percentage of your current allowance/income do you want to allocate in this kind of plan?")
             Bot.on :message do |message|
@@ -397,11 +400,54 @@ def final_invest_process
     case message.text
     when "Stock" then @user.insurances.first.update(type: "Stock")
     when "Cryptocurrency" then @user.insurances.first.update(type: "Crypto")
+    else menu
     end
-
 
     #process
     #insert coins etc
   end
 end
+
+def report message
+  @user = User.find_by(messenger_id: message.sender[:id])
+  timelines = if @user.goal == "Long Term"
+                [30,60,120]
+              elsif @user.goal == "Short Term"
+                [3,7,14,30]
+              else
+                [1,7,30]
+              end
+            
+  tally = if @user.insurances.first.type == "Stock"
+            "" + timelines.each do |t|
+              "For #{t} days - #{Analytics::Methods.stocks(t)}"
+            end
+          else
+            "" + timelines.each do |t|
+              "Bitcoin - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n"
+              "Etherium - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n"
+              "Bitcoin Cash - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n"
+            end            
+          end
+  percentage = @user.insurances.first.sickness
+  plans = if @user.insurances.first.type == "Stock"
+              "Stocks - For #{30} days - #{Analytics::Methods.housing(@user.income, percentage, 'STOCKS', 30)}\n" +
+              "Stocks - For #{30} days - #{Analytics::Methods.sickness(@user.income, percentage, 'STOCKS', 30)}\n" +
+              "Stocks - For #{30} days - #{Analytics::Methods.disability(@user.income, percentage, 'STOCKS', 30)}\n" +
+              "Stocks - For #{30} days - #{Analytics::Methods.maternity(@user.income, percentage, 'STOCKS', 30)}\n" +
+              "Stocks - For #{30} days - #{Analytics::Methods.retirement(@user.income, percentage, 'STOCKS', 30)}\n" +
+              "Stocks - For #{30} days - #{Analytics::Methods.funeral(@user.income, percentage, 'STOCKS', 30)}\n" +
+              "Stocks - For #{30} days - #{Analytics::Methods.education(@user.income, percentage, 'STOCKS', 30)}\n"
+          elsif @user.insurances.first.type == "Crypto"
+              "Cryptocurrency - For #{30} days - #{Analytics::Methods.housing(@user.income, percentage, 'BTC', 30)}\n" +
+              "Cryptocurrency - For #{30} days - #{Analytics::Methods.sickness(@user.income, percentage, 'BTC', 30)}\n" +
+              "Cryptocurrency - For #{30} days - #{Analytics::Methods.disability(@user.income, percentage, 'BTC', 30)}\n" +
+              "Cryptocurrency - For #{30} days - #{Analytics::Methods.maternity(@user.income, percentage, 'BTC', 30)}\n" +
+              "Cryptocurrency - For #{30} days - #{Analytics::Methods.retirement(@user.income, percentage, 'BTC', 30)}\n" +
+              "Cryptocurrency - For #{30} days - #{Analytics::Methods.funeral(@user.income, percentage, 'BTC', 30)}\n" +
+              "Cryptocurrency - For #{30} days - #{Analytics::Methods.education(@user.income, percentage, 'BTC', 30)}\n"
+          end
+  output = "Your report for today:\n" + tally + plans
+end
+
 welcome
