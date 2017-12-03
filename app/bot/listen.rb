@@ -474,7 +474,7 @@ def report message
                 [1,7,30]
               end
 
-  tally =   timelines.each{ |t|
+  tally =   timelines.map{ |t|
               "Stocks - For #{t} days - #{Analytics::Methods.stocks(t)}\n" + 
               "Bitcoin - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n" +
               "Etherium - For #{t} days - #{Analytics::Methods.bitcoin(t)}\n" +
