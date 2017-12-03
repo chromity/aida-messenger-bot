@@ -403,8 +403,53 @@ def final_invest_process
     else menu
     end
 
+<<<<<<< HEAD
+=======
+
+    message.reply(
+      text: 'Open Unionbank to start investing now?',
+      quick_replies: [
+        {
+          content_type: 'text',
+          title: "Sign-in",
+          payload: "Sign-in"
+        }
+      ]
+    )
+
+    Bot.on :messages do |message|
+      message.typing_on
+      sleep 1
+      message.reply(text: "Please enter the amount to cash-in")
+
+      Bot.on :messages do |message|
+        amount = message.text
+        message.typing_on
+        sleep 1
+        message.reply(text: "Convert to bitcoin?",
+        quick_replies: [
+          {
+            content_type: 'text',
+            title: 'Yes',
+            payload: 'Yes'
+          },
+          {
+            content_type: 'text',
+            title: 'No',
+            payload: 'No'
+          }
+          ])
+        forecasted
+      end
+
+    end
     #process
     #insert coins etc
+  end
+end
+
+def forecasted
+  Bot.on :messages do |messages|
   end
 end
 
@@ -449,5 +494,4 @@ def report message
           end
   output = "Your report for today:\n" + tally + plans
 end
-
 welcome
